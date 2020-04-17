@@ -1,5 +1,153 @@
 package model;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import database.dbconnect;
+
 public class Doctor {
+	
+	dbconnect obj=new dbconnect();
+	
+	public String insertDoctor(String docName, String docAge, String docGender, String docSpecialization) {
+				
+				String output = "";
+				try {
+					Connection con = obj.connect();
+					if (con == null) {
+						return "Error while connecting to the database for inserting.";
+					}
+					// create a prepared statement
+					String query = " insert into doctor(`docName`,`docAge`,'docGender`,`docSpecialization`)"
+							+ " values (?, ?, ?, ?)";
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+					
+					preparedStmt.setString(1, docName);
+					preparedStmt.setString(2, docAge);
+					preparedStmt.setString(3, docGender);
+					preparedStmt.setString(4, docSpecialization);
+
+				
+					preparedStmt.execute();
+					con.close();
+					output = "Inserted successfully";
+					System.out.println("Inserted successfully.......................................");
+				} catch (Exception e) {
+					output = "Error while inserting the Doctors.";
+					System.out.println("Error while inserting the Doctors........."+ e);
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
+	 //
+			public String readDoctor() {
+				String output = "";
+				try {
+					Connection con = obj.connect();
+					if (con == null) {
+						return "Error while connecting to the database for reading.";
+					}
+					// Prepare the html table to be displayed
+					output = "<table border=\"1\">"
+							+ "<th>Doctor Name</th"
+							+ "><th>Doctor Age</th>"
+							+ "<th>Doctor Gender</th>"
+							+ "<th>Doctor Specialization</th>"
+							+ "<th>Update</th>"
+							+ "<th>Remove</th></tr>";
+					String query = "select * from doctor";
+					Statement stmt = con.createStatement();
+					ResultSet rs = stmt.executeQuery(query);
+					// iterate through the rows in the result set
+					while (rs.next()) {
+						String docID = Integer.toString(rs.getInt("docID"));
+						String docName = rs.getString("docName");
+						String docAge = rs.getString("docAge");
+						String docGender = rs.getString("docGender");
+						String docSpecialization = rs.getString("docSpecialization");
+						
+						
+						// Add into the html table
+						output += "<tr><td><input id=\"didDoctorIDUpdate\"name=\"didDoctorIDUpdate\"type=\"hidden\" value=\"" + docID + "\">"
+	                            + docName + "</td>";
+						output += "<td>" + docAge + "</td>";
+						output += "<td>" + docGender + "</td>";
+						output += "<td>" + docSpecialization + "</td>";
+						
+						// buttons
+						output += "<td><input name=\"btnUpdate\" type=\"submit\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
+								+ "<td><form method=\"post\" action=\"Doctor_Insert.jsp\">"
+								+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
+								+ "<input name=\"didDoctorIDDelete\" type=\"hidden\" value=\"" + docID + "\">" + "</form></td></tr>";
+						//1233
+					}
+					con.close();
+					// Complete the html table
+					output += "</table>";
+				} catch (Exception e) {
+					output = "Error while reading the Doctors.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
+			
+			public String updateDoctor(String docID, String docName, String docAge , String docGender , String docSpecialization ) {
+				System.out.println("Update method...............................................................................");
+				String output = "";
+				try {
+					Connection con = obj.connect();
+					if (con == null) {
+						return "Error while connecting to the database for updating.";
+					}
+					//update
+					// create a prepared statement
+					String query = "UPDATE doctor SET docName=?,docAge=?,docGender=?,docSpecialization=? WHERE docID=?";
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+					// binding values
+					preparedStmt.setString(1, docName);
+					preparedStmt.setString(2, docAge);
+					preparedStmt.setString(3, docGender);
+					preparedStmt.setString(4, docSpecialization);
+					preparedStmt.setInt(5, Integer.parseInt(docID));
+					// execute the statement
+					preparedStmt.execute();
+					con.close();
+					output = "Updated successfully";
+				} catch (Exception e) {
+					output = "Error while updating the Doctor.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
+			
+			public String deleteDoctor(String docID) {
+				String output = "";
+				try {
+					Connection con = obj.connect();
+					if (con == null) {
+						return "Error while connecting to the database for deleting.";
+					}
+					// create a prepared statement
+					String query = "delete from doctor where docID=?";
+					PreparedStatement preparedStmt = con.prepareStatement(query);
+					// binding values
+					preparedStmt.setInt(1, Integer.parseInt(docID));
+					// execute the statement
+					preparedStmt.execute();
+					con.close();
+					output = " Doctor Deleted successfully";
+				} catch (Exception e) {
+					output = "Error while deleting the Doctor.";
+					System.err.println(e.getMessage());
+				}
+				return output;
+			}
+			
+					
+			
+	
+	
 
 }
