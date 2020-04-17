@@ -4,15 +4,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;  
-
 import database.dbconnect;
+import java.sql.DriverManager;
 
 public class Payment {
 	
 	dbconnect obj=new dbconnect();
-	
+		
 public String insertPayment(String payDate, String payMethod, String payAmount) {
-			
+			System.out.println("insert");
 			String output = "";
 			try {
 				Connection con = obj.connect();
@@ -20,7 +20,7 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 					return "Error while connecting to the database for inserting.";
 				}
 				// create a prepared statement
-				String query = " insert into payment(`payDate`,`payMethod`,` payAmount`)"
+				String query = " insert into payment(`payDate`,`payMethod`,`payAmount`)"
 						+ " values (?, ?, ?)";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				
@@ -31,7 +31,6 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 			    preparedStmt.execute();
 				con.close();
 				output = "Inserted successfully";
-				System.out.println("Inserted successfully.......................................");
 			} catch (Exception e) {
 				output = "Error while inserting the Payments.";
 				System.out.println("Error while inserting the Payments........."+ e);
@@ -74,7 +73,7 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 					output += "<td><input name=\"btnUpdate\" type=\"submit\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
 							+ "<td><form method=\"post\" action=\"Payment_Insert.jsp\">"
 							+ "<input name=\"btnRemove\" type=\"submit\" value=\"Remove\"class=\"btn btn-danger\">"
-							+ "<input name=\"pidpaymentIDDelete\" type=\"hidden\" value=\"" + payID + "\">" + "</form></td></tr>";
+							+ "<input name=\"pidPaymentIDDelete\" type=\"hidden\" value=\"" + payID + "\">" + "</form></td></tr>";
 					//1233
 				}
 				con.close();

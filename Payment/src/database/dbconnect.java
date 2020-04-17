@@ -15,7 +15,6 @@ public class dbconnect {
    //Connection//good
 	 //Provide the correct details: DBServer/DBName, username, password
 	 con = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/paf_db?useTimezone=true&serverTimezone=UTC", "root", "");
-	 System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
 	 
 	 }
 	 catch (Exception e)

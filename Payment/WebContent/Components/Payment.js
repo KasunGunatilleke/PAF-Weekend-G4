@@ -19,6 +19,7 @@ $(document).on("click", "#btnSave", function(event) {
 		return;
 	}
 	// If valid------------------------
+	
 	$("#formPayment").submit();
 });
 // UPDATE==========================================

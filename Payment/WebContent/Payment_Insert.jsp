@@ -4,7 +4,7 @@
     
     
 <%	
-	if (request.getParameter("payID") != null) {
+	if (request.getParameter("payDate") != null) {
 		Payment Payment_1 = new Payment();
 		String
 		stsMsg = "";
