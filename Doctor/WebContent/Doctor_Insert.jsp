@@ -73,8 +73,8 @@
 	</div>
 
 	<%
-	 Doctor h1= new Doctor();
-	out.print(h1.readDoctor());
+	 Doctor d1= new Doctor();
+	out.print(d1.readDoctor());
 	%>
 		<script language="javascript">
 

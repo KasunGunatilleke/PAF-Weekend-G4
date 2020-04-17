@@ -21,14 +21,14 @@ import model.Doctor;
 @Path("/Doctor") 
 
 public class DoctorService {
-	Doctor h1 = new Doctor();
+	Doctor d1 = new Doctor();
 	   @GET
 	   @Path("/")
 	@Produces(MediaType.TEXT_HTML)
 	 
 	   public String readDoctor()
 	   {
-	   return h1.readDoctor();
+	   return d1.readDoctor();
 	   }
 	   @POST
 	   @Path("/")
@@ -41,7 +41,7 @@ public class DoctorService {
 	    @FormParam("docSpecialization") String docSpecialization
 	 )
 	   {
-	    String output = h1.insertDoctor(docName,docAge ,docGender ,docSpecialization );
+	    String output = d1.insertDoctor(docName,docAge ,docGender ,docSpecialization );
 	   return output;
 	   }
 	   @PUT
@@ -51,15 +51,15 @@ public class DoctorService {
 	   public String updateDoctor(String dData)
 	   {
 	   
-	    JsonObject h2 = new JsonParser().parse(dData).getAsJsonObject();
-	    String docID = h2.get("docID").getAsString();
-	    String docName = h2.get("docName").getAsString();
-	    String docAge = h2.get("docAge").getAsString();
-	    String docGender = h2.get("docGender").getAsString();
-	    String docSpecialization = h2.get("docSpecialization").getAsString();
+	    JsonObject d2 = new JsonParser().parse(dData).getAsJsonObject();
+	    String docID = d2.get("docID").getAsString();
+	    String docName = d2.get("docName").getAsString();
+	    String docAge = d2.get("docAge").getAsString();
+	    String docGender = d2.get("docGender").getAsString();
+	    String docSpecialization = d2.get("docSpecialization").getAsString();
 	    
 	   
-	   String output = h1.updateDoctor(docID, docName,docAge,docGender,docSpecialization);
+	   String output = d1.updateDoctor(docID, docName,docAge,docGender,docSpecialization);
 	   return output;
 	   }
 	   @DELETE
@@ -73,7 +73,7 @@ public class DoctorService {
 
 	 
 	    String docID = doc.select("docID").text();
-	    String output = h1.deleteDoctor(docID);
+	    String output = d1.deleteDoctor(docID);
 	   return output;
 	   }
 
