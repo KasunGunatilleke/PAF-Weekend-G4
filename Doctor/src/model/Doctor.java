@@ -20,7 +20,7 @@ public class Doctor {
 						return "Error while connecting to the database for inserting.";
 					}
 					// create a prepared statement
-					String query = " insert into doctor(`docName`,`docAge`,'docGender`,`docSpecialization`)"
+					String query = " insert into doctor(`docName`,`docAge`,`docGender`,`docSpecialization`)"
 							+ " values (?, ?, ?, ?)";
 					PreparedStatement preparedStmt = con.prepareStatement(query);
 					
