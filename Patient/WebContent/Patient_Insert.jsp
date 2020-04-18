@@ -13,7 +13,7 @@
                 request.getParameter("Gender"), request
                         .getParameter("Email"), request
                         .getParameter("Phone"), request
-                        .getParameter("Address"), request
+                        .getParameter("address"), request
                         .getParameter("Password"), request
                         .getParameter("ConfirmPassword"));
     } else//Update----------------------
@@ -23,7 +23,7 @@
                                 .getParameter("Gender"), request
                                 .getParameter("Email"), request
                                 .getParameter("Phone"), request
-                                .getParameter("Address"), request
+                                .getParameter("address"), request
                                 .getParameter("Password"), request
                                 .getParameter("ConfirmPassword"));
     }
@@ -65,23 +65,23 @@
 				    <input type="radio" name="Gender" value="Female" class="form-radio">Female<br><br>
 					
 					<lable for="Email">Email:</lable>
-					<input type="Email" class="form-control"  id="Address" placeholder="Enter your Address" name="Email"><br>
+					<input type="Email" class="form-control" id="Email" placeholder="Enter your Email" name="Email"><br>
 					
 					<lable for="Phone">Phone:</lable>
-					<input type="Phone" class="form-control"  id="Phone" placeholder="Enter your Contact number" name="Phone"><br>
+					<input type="Phone" class="form-control" id="Phone" placeholder="Enter your Contact number" name="Phone"><br>
 					
 					<lable for=" Address"> Address:</lable>
-					<input type=" address" class="form-control"  id=" address" placeholder="Enter your Address" name="address"><br>
+					<input type=" address" class="form-control" id="address" placeholder="Enter your Address" name="address"><br>
 								
 					<lable for=" Password"> Password:</lable>
 					<input type="Password" class="form-control" id="Password" placeholder="Enter your password" name="Password"><br>
 									
 					<lable for="ConfirmPassword"> ConfirmPassword:</lable>
-					<input type="Password" class="form-control" id="ConfirmPassword" placeholder="Enter your ConfirmPassword" name="ConfirmPassword"><br>
+					<input type="Password" class="form-control" id="ConfirmPassword" placeholder="Re Enter your Password" name="ConfirmPassword"><br>
 					
 					<input id="btnSave" name="btnSave" type="submit" value="Save"
 			          class="btn btn-primary"> 
-										
+					<input type="hidden" id="hidPatientIDSave" name="hidPatientIDSave" value="">					
 					</div> 
 				   </form>
 				   
