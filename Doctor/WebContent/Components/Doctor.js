@@ -28,6 +28,8 @@ $(document).on("click",".btnUpdate",function(event) {
 			$("#docAge").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#docGender").val($(this).closest("tr").find('td:eq(2)').text());
 			$("#docSpecialization").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#hosID").val($(this).closest("tr").find('td:eq(4)').text());
+			
 		});
 // CLIENTMODEL=========================================================================
 function validateDoctorForm() {
@@ -48,6 +50,11 @@ function validateDoctorForm() {
 	if ($("#docSpecialization").val().trim() == "") {
 		return "Insert Doctor Specialization.";
 	}
+	
+	if ($("#hosID").val().trim() == "") {
+		return "Insert Hospital ID.";
+	}
+
 	return true;
 }
 

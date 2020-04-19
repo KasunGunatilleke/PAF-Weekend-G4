@@ -14,14 +14,16 @@
 			stsMsg = Doctor_1.insertDoctor(request.getParameter("docName"),
 					request.getParameter("docAge"), request
 							.getParameter("docGender"), request
-							.getParameter("docSpecialization"));
+							.getParameter("docSpecialization"), request
+							.getParameter("hosID"));
 		} else//Update----------------------
 		{
 			stsMsg = Doctor_1.updateDoctor(request.getParameter("didDoctorIDSave"),
 							request.getParameter("docName"), request
 									.getParameter("docAge"), request
 									.getParameter("docGender"), request
-									.getParameter("docSpecialization"));
+									.getParameter("docSpecialization"), request
+									.getParameter("hosID"));
 		}
 		session.setAttribute("statusMsg", stsMsg);
 	}
@@ -60,6 +62,10 @@
 		Doctor Specialization:
 		 <input id="docSpecialization" name="docSpecialization" type="text"  
 			class="form-control form-control-sm" required> <br> 
+		Hospital ID:
+		<input id="hosID" name="hosID" type="text"  
+			class="form-control form-control-sm" required> <br>
+			
 		<input id="btnSave" name="btnSave" type="submit" value="Save" 
 			class="btn btn-primary"  > 
 		<input type="hidden" id="didDoctorIDSave" name="didDoctorIDSave" value="">

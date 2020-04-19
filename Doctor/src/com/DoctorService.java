@@ -38,10 +38,11 @@ public class DoctorService {
 	    @FormParam("docName") String docName,
 	    @FormParam("docAge") String docAge,
 	    @FormParam("docGender") String docGender,
-	    @FormParam("docSpecialization") String docSpecialization
+	    @FormParam("docSpecialization") String docSpecialization,
+	    @FormParam("hosID") String hosID
 	 )
 	   {
-	    String output = d1.insertDoctor(docName,docAge ,docGender ,docSpecialization );
+	    String output = d1.insertDoctor(docName,docAge ,docGender ,docSpecialization, hosID);
 	   return output;
 	   }
 	   @PUT
@@ -57,9 +58,10 @@ public class DoctorService {
 	    String docAge = d2.get("docAge").getAsString();
 	    String docGender = d2.get("docGender").getAsString();
 	    String docSpecialization = d2.get("docSpecialization").getAsString();
+	    String hosID = d2.get("hosID").getAsString();
 	    
 	   
-	   String output = d1.updateDoctor(docID, docName,docAge,docGender,docSpecialization);
+	   String output = d1.updateDoctor(docID, docName,docAge,docGender,docSpecialization,hosID);
 	   return output;
 	   }
 	   @DELETE
