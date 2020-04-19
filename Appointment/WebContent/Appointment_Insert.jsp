@@ -4,24 +4,24 @@
     
     
 <%	
-	if (request.getParameter("DocID") != null) {
+	if (request.getParameter("docID") != null) {
 		Appointment Appointment_1 = new Appointment();
 		String
 		stsMsg = "";
 		
 		//Insert--------------------------
 		if (request.getParameter("aidAppointmentIDSave") == "") {
-			stsMsg = Appointment_1.insertAppointment(request.getParameter("DocID"),
+			stsMsg = Appointment_1.insertAppointment(request.getParameter("docID"),
 					request.getParameter("AppDate"), request
 							.getParameter("AppTime"), request
-							.getParameter("patient_id"));
+							.getParameter("PID"));
 		} else//Update----------------------
 		{
 			stsMsg = Appointment_1.updateAppointment(request.getParameter("aidAppointmentIDSave"),
-							request.getParameter("DocID"), request
+							request.getParameter("docID"), request
 									.getParameter("AppDate"), request
 									.getParameter("AppTime"), request
-									.getParameter("patient_id"));
+									.getParameter("PID"));
 		}
 		session.setAttribute("statusMsg", stsMsg);
 	}
@@ -49,7 +49,7 @@
 <body>
 	<form id="formAppointment" name="formAppointment" method="post" action="Appointment_Insert.jsp">
 	    Doctor ID:
-	     <input id="DocID" name="DocID" type="text" 
+	     <input id="docID" name="docID" type="text" 
 			class="form-control form-control-sm"required > <br> 
 		Appointment Date: 
 		<input id="AppDate" name="AppDate" type="date"
@@ -58,7 +58,7 @@
 		 <input id="AppTime" name="AppTime" type="time"  
 			class="form-control form-control-sm" required> <br> 
 		Patient ID:
-		 <input id="patient_id" name="patient_id" type="text"  
+		 <input id="PID" name="PID" type="text"  
 			class="form-control form-control-sm" required> <br> 
 		<input id="btnSave" name="btnSave" type="submit" value="Save" 
 			class="btn btn-primary"  > 

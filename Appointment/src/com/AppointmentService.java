@@ -34,11 +34,11 @@ public class AppointmentService {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.TEXT_PLAIN)
 	public String insertAppointment(
-			@FormParam("DocID") String DocID, 
+			@FormParam("docID") String docID, 
 			@FormParam("AppDate") String AppDate,
 			@FormParam("AppTime") String AppTime, 
-			@FormParam("patient_id") String patient_id) {
-		String output = a1.insertAppointment(DocID,AppDate, AppTime, patient_id);
+			@FormParam("PID") String PID) {
+		String output = a1.insertAppointment(docID,AppDate, AppTime,PID);
 		return output;
 	}
 
@@ -51,13 +51,13 @@ public class AppointmentService {
 	   
 	    JsonObject a2 = new JsonParser().parse(dData).getAsJsonObject();
 	    String AppID = a2.get("AppID").getAsString();
-	    String DocID = a2.get("DocID").getAsString();
+	    String docID = a2.get("docID").getAsString();
 	    String AppDate = a2.get("AppDate").getAsString();
 	    String AppTime = a2.get("AppTime").getAsString();
-	    String patient_id = a2.get("patient_id").getAsString();
+	    String PID = a2.get("PID").getAsString();
 	    
 	   
-	   String output = a1.updateAppointment( AppID,  DocID, AppDate, AppTime, patient_id);
+	   String output = a1.updateAppointment( AppID,  docID, AppDate, AppTime, PID);
 	   return output;
 	   }
 

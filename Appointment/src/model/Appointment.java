@@ -12,12 +12,12 @@ public class Appointment {
 	
 	dbconnect obj = new dbconnect();
 	
-public String insertAppointment(String DocID, String AppDate, String AppTime, String patient_id) {
+public String insertAppointment(String docID, String AppDate, String AppTime, String PID) {
 	
-	System.out.println(DocID);
+	System.out.println(docID);
 	System.out.println(AppDate);
 	System.out.println(AppTime);
-	System.out.println(patient_id);
+	System.out.println(PID);
 	
 		String output = "";
 		try {
@@ -26,13 +26,13 @@ public String insertAppointment(String DocID, String AppDate, String AppTime, St
 				return "Error while connecting to the database for inserting.";
 			}
 			// create a prepared statement
-			String query = " insert into appointment(DocID,AppDate,AppTime,patient_id) values (?, ?, ?, ?)";
+			String query = " insert into appointment(docID,AppDate,AppTime,PID) values (?, ?, ?, ?)";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			
-			preparedStmt.setInt(1, Integer.parseInt(DocID));
+			preparedStmt.setInt(1, Integer.parseInt(docID));
 			preparedStmt.setDate(2, Date.valueOf(AppDate));
 			preparedStmt.setString(3, AppTime);
-			preparedStmt.setInt(4, Integer.parseInt(patient_id));
+			preparedStmt.setInt(4, Integer.parseInt(PID));
 			preparedStmt.execute();
 			con.close();
 			output = "Inserted successfully";
@@ -66,18 +66,18 @@ public String insertAppointment(String DocID, String AppDate, String AppTime, St
 			// iterate through the rows in the result set
 			while (rs.next()) {
 				String AppID = Integer.toString(rs.getInt("AppID"));
-				String DocID = Integer.toString(rs.getInt("DocID"));
+				String docID = Integer.toString(rs.getInt("docID"));
 				String AppDate = rs.getString("AppDate");
 				String AppTime = rs.getString("AppTime");
-				String patient_id = Integer.toString(rs.getInt("patient_id"));
+				String PID = Integer.toString(rs.getInt("PID"));
 				
 				
 				// Add into the html table
 				output += "<tr><td><input id=\"aidAppointmentIDUpdate\"name=\"aidAppointmentIDUpdate\"type=\"hidden\" value=\"" + AppID + "\">"
-                        + DocID + "</td>";
+                        + docID + "</td>";
 				output += "<td>" + AppDate + "</td>";
 				output += "<td>" + AppTime + "</td>";
-				output += "<td>" + patient_id + "</td>";
+				output += "<td>" + PID + "</td>";
 				
 				// buttons
 				output += "<td><input name=\"btnUpdate\" type=\"submit\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
@@ -96,7 +96,7 @@ public String insertAppointment(String DocID, String AppDate, String AppTime, St
 		return output;
 	}
 	
-	public String updateAppointment(String AppID, String DocID, String AppDate, String AppTime, String patient_id) {
+	public String updateAppointment(String AppID, String docID, String AppDate, String AppTime, String PID) {
 		System.out.println("Update method...............................................................................");
 		String output = "";
 		try {
@@ -106,13 +106,13 @@ public String insertAppointment(String DocID, String AppDate, String AppTime, St
 			}
 			//update
 			// create a prepared statement
-			String query = "UPDATE appointment SET DocID=?,AppDate=?,AppTime=?,patient_id=? WHERE AppID=?";
+			String query = "UPDATE appointment SET docID=?,AppDate=?,AppTime=?,PID=? WHERE AppID=?";
 			PreparedStatement preparedStmt = con.prepareStatement(query);
 			// binding values
-			preparedStmt.setInt(1, Integer.parseInt(DocID));
+			preparedStmt.setInt(1, Integer.parseInt(docID));
 			preparedStmt.setDate(2, Date.valueOf(AppDate));
 			preparedStmt.setString(3, AppTime);
-			preparedStmt.setInt(4, Integer.parseInt(patient_id));
+			preparedStmt.setInt(4, Integer.parseInt(PID));
 			preparedStmt.setInt(5, Integer.parseInt(AppID));
 			// execute the statement
 			preparedStmt.execute();

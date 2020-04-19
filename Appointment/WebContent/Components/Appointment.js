@@ -24,10 +24,10 @@ $(document).on("click", "#btnSave", function(event) {
 // UPDATE==========================================
 $(document).on("click",".btnUpdate",function(event) {
 			$("#aidAppointmentIDSave").val($(this).closest("tr").find('#aidAppointmentIDUpdate').val());
-			$("#DocID").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#docID").val($(this).closest("tr").find('td:eq(0)').text());
 			$("#AppDate").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#AppTime").val($(this).closest("tr").find('td:eq(2)').text());
-			$("#patient_id").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#PID").val($(this).closest("tr").find('td:eq(3)').text());
 		});
 // CLIENTMODEL=========================================================================
 function validateAppointmentForm() {
@@ -36,7 +36,7 @@ function validateAppointmentForm() {
 //		return "Insert Appointment ID.";
 //	}
 	
-	if ($("#DocID").val().trim() == "") {
+	if ($("#docID").val().trim() == "") {
 		return "Insert Doctor ID.";
 	}
 	
@@ -47,7 +47,7 @@ function validateAppointmentForm() {
 	if ($("#AppTime").val().trim() == "") {
 		return "Insert Appointment Time.";
 	}
-	if ($("#patient_id").val().trim() == "") {
+	if ($("#PID").val().trim() == "") {
 		return "Insert Patient ID.";
 	}
 	return true;
