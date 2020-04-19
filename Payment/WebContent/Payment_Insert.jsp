@@ -13,13 +13,19 @@
 		if (request.getParameter("pidPaymentIDSave") == "") {
 			stsMsg = Payment_1.insertPayment(request.getParameter("payDate"),
 					request.getParameter("payMethod"), request
-							.getParameter("payAmount"));
+					       .getParameter("payAmount"), request
+					       .getParameter("PID"), request
+					       .getParameter("hosID"), request
+						   .getParameter("AppID"));
 		} else//Update----------------------
 		{
 			stsMsg = Payment_1.updatePayment(request.getParameter("pidPaymentIDSave"),
 							request.getParameter("payDate"), request
 									.getParameter("payMethod"), request
-									.getParameter("payAmount"));
+									.getParameter("payAmount"), request
+									.getParameter("PID"), request
+									.getParameter("hosID"), request
+									.getParameter("AppID"));
 		}
 		session.setAttribute("statusMsg", stsMsg);
 	}
@@ -47,14 +53,23 @@
 <body>
  <form id="formPayment" name="formPayment" method="post" action="Payment_Insert.jsp">
 		Payment Date: 
-		<input id="payDate" name="payDate" type="text"
+		<input id="payDate" name="payDate" type="date"
 			class="form-control form-control-sm" required> <br>
-	    payment Method:
+	    Payment Method:
 	     <input id="payMethod" name="payMethod" type="text"  
 			 class="form-control form-control-sm"required > <br> 
 		Payment Amount: 
 		<input id="payAmount" name="payAmount" type="text"
-			class="form-control form-control-sm" required> <br> 
+			class="form-control form-control-sm" required> <br>
+		Patient ID:
+		<input id="PID" name="PID" type="text"
+			class="form-control form-control-sm" required> <br>	
+		Hospital ID:
+		<input id="hosID" name="hosID" type="text"
+			class="form-control form-control-sm" required> <br>		
+		Appointment ID:
+		<input id="AppID" name="AppID" type="text"
+			class="form-control form-control-sm" required> <br>				 
 		<input id="btnSave" name="btnSave" type="submit" value="Save" 
 			class="btn btn-primary"  > 
 		<input type="hidden" id="pidPaymentIDSave" name="pidPaymentIDSave" value="">

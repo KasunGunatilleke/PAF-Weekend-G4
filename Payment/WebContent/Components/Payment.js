@@ -28,6 +28,9 @@ $(document).on("click",".btnUpdate",function(event) {
 			$("#payDate").val($(this).closest("tr").find('td:eq(0)').text());
 			$("#payMethod").val($(this).closest("tr").find('td:eq(1)').text());
 			$("#payAmount").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#PID").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#hosID").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#AppID").val($(this).closest("tr").find('td:eq(5)').text());
 		
 		});
 // CLIENTMODEL=========================================================================
@@ -46,7 +49,19 @@ function validatePaymentForm() {
 		return "Insert Payment Amount.";
 	}
 	
-	
+	if ($("#PID").val().trim() == "") {
+		return "Insert Patient ID.";
+	}
+	// NAME
+	if ($("#hosID").val().trim() == "") {
+		return "Insert Hospital ID.";
+	}
+	// PRICE-------------------------------
+
+	if ($("#AppID").val().trim() == "") {
+		return "Insert Appointment ID.";
+	}
+		
   return true;
 }
 

@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;  
@@ -11,7 +12,15 @@ public class Payment {
 	
 	dbconnect obj=new dbconnect();
 		
-public String insertPayment(String payDate, String payMethod, String payAmount) {
+public String insertPayment(String payDate, String payMethod, String payAmount,String PID,String hosID,String AppID) {
+	
+	System.out.println(payDate);
+	System.out.println(payMethod);
+	System.out.println(payAmount);
+	System.out.println(PID);
+	System.out.println(hosID);
+	System.out.println(AppID);
+	
 			System.out.println("insert");
 			String output = "";
 			try {
@@ -20,13 +29,16 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 					return "Error while connecting to the database for inserting.";
 				}
 				// create a prepared statement
-				String query = " insert into payment(`payDate`,`payMethod`,`payAmount`)"
-						+ " values (?, ?, ?)";
+				String query = " insert into payment(`payDate`,`payMethod`,`payAmount`,`PID`,`hosID`,`AppID`)"
+						+ " values (?, ?, ?,?,?,?)";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				
-				preparedStmt.setString(1, payDate );
-				preparedStmt.setString(2, payMethod );
-				preparedStmt.setString(3, payAmount);
+				preparedStmt.setDate(1, Date.valueOf(payDate));
+				preparedStmt.setString(2, payMethod);
+				preparedStmt.setFloat(3, Float.parseFloat(payAmount));
+				preparedStmt.setInt(4, Integer.parseInt(PID));
+				preparedStmt.setInt(5, Integer.parseInt(hosID));
+				preparedStmt.setInt(6, Integer.parseInt(AppID));
 			
 			    preparedStmt.execute();
 				con.close();
@@ -48,9 +60,12 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 				}
 				// Prepare the html table to be displayed
 				output = "<table border=\"1\">"
-						+ "<th> payDate </th"
-						+ "><th> payMethod </th>"
-						+ "<th> payAmount</th>"
+						+ "<th> pay Date </th"
+						+ "><th> pay Method </th>"
+						+ "<th> pay Amount</th>"
+						+ "<th> PID</th>"
+						+ "<th> hosID</th>"
+						+ "<th> AppID</th>"
 						+ "<th>Update</th>"
 						+ "<th>Remove</th></tr>";
 				String query = "select * from payment";
@@ -62,12 +77,18 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 					String payDate = rs.getString("payDate");
 					String payMethod = rs.getString("payMethod");
 					String payAmount = rs.getString("payAmount");
+					String PID = Integer.toString(rs.getInt("PID"));
+					String hosID = Integer.toString(rs.getInt("hosID"));
+					String AppID = Integer.toString(rs.getInt("AppID"));
 					
 					// Add into the html table
 					output += "<tr><td><input id=\"pidPaymentIDUpdate\"date=\"pidPaymentIDUpdate\"type=\"hidden\" value=\"" + payID + "\">"
                             + payDate + "</td>";
 					output += "<td>" + payMethod + "</td>";
 					output += "<td>" + payAmount + "</td>";
+					output += "<td>" + PID + "</td>";
+					output += "<td>" + hosID + "</td>";
+					output += "<td>" + AppID + "</td>";
 				
 					// buttons
 					output += "<td><input name=\"btnUpdate\" type=\"submit\"value=\"Update\" class=\"btn btn-warning btnUpdate\"></td>"
@@ -86,7 +107,7 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 			return output;
 		}
 		
-		public String updatePayment(String payID, String payDate, String payMethod, String payAmount) {
+		public String updatePayment(String payID, String payDate, String payMethod, String payAmount,String PID,String hosID,String AppID) {
 			System.out.println("Update method...............................................................................");
 			String output = "";
 			try {
@@ -96,13 +117,16 @@ public String insertPayment(String payDate, String payMethod, String payAmount) 
 				}
 				//update
 				// create a prepared statement
-				String query = "UPDATE payment SET payDate=?, payMethod=?, payAmount=? WHERE payID=?";
+				String query = "UPDATE payment SET payDate=?, payMethod=?, payAmount=?,PID=?,hosID=?,AppID=? WHERE payID=?";
 				PreparedStatement preparedStmt = con.prepareStatement(query);
 				// binding values
-				preparedStmt.setString(1, payDate);
+				preparedStmt.setDate(1, Date.valueOf(payDate));
 				preparedStmt.setString(2, payMethod);
-				preparedStmt.setString(3, payAmount);
-				preparedStmt.setInt(4, Integer.parseInt(payID));
+				preparedStmt.setFloat(3, Float.parseFloat(payAmount));
+				preparedStmt.setInt(4, Integer.parseInt(PID));
+				preparedStmt.setInt(5, Integer.parseInt(hosID));
+				preparedStmt.setInt(6, Integer.parseInt(AppID));
+				preparedStmt.setInt(7, Integer.parseInt(payID));
 				// execute the statement
 				preparedStmt.execute();
 				con.close();
