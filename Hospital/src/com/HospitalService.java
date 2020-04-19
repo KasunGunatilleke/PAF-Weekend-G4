@@ -26,11 +26,11 @@ public class HospitalService {
     @Produces(MediaType.TEXT_PLAIN)
     public String insertHospital(
         @FormParam("hosName") String hosName,
-        @FormParam("hosTelNoe") String H_Contact_Number,
+        @FormParam("hosTelNo") String hosTelNo,
         @FormParam("hosAddress") String hosAddress,
         @FormParam("hosEmail") String hosEmail
     ) {
-        String output = h1.insertHospital(hosName, H_Contact_Number, hosAddress, hosEmail);
+        String output = h1.insertHospital(hosName, hosTelNo, hosAddress, hosEmail);
         return output;
     }
     @PUT
@@ -42,12 +42,12 @@ public class HospitalService {
         JsonObject h2 = new JsonParser().parse(dData).getAsJsonObject();
         String hosID = h2.get("hosID").getAsString();
         String hosName = h2.get("hosName").getAsString();
-        String hosTelNoe = h2.get("hosTelNoe").getAsString();
+        String hosTelNoe = h2.get("hosTelNo").getAsString();
         String hosAddress = h2.get("hosAddress").getAsString();
         String hosEmail = h2.get("hosEmail").getAsString();
 
 
-        String output = h1.updateHopital(hosID, hosName, hosTelNoe, hosAddress, hosEmail);
+        String output = h1.updateHopital(hosID, hosName, hosTelNo, hosAddress, hosEmail);
         return output;
     }
     @DELETE

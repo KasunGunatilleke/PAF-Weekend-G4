@@ -11,7 +11,7 @@ public class Hospital {
     //A common method to connect to the DB
     dbconnect obj = new dbconnect();
 
-    public String insertHospital(String hName, String contactNo, String address, String email) {
+    public String insertHospital(String hosName, String hosTelNo, String hosAddress, String hosEmail) {
 
         String output = "";
         try {
@@ -24,10 +24,10 @@ public class Hospital {
                 " values (?, ?, ?, ?)";
             PreparedStatement preparedStmt = con.prepareStatement(query);
 
-            preparedStmt.setString(1, hName);
-            preparedStmt.setString(2, contactNo);
-            preparedStmt.setString(3, address);
-            preparedStmt.setString(4, email);
+            preparedStmt.setString(1, hosName);
+            preparedStmt.setString(2, hosTelNo);
+            preparedStmt.setString(3, hosAddress);
+            preparedStmt.setString(4, hosEmail);
             preparedStmt.execute();
             con.close();
             output = "Inserted successfully";
@@ -143,45 +143,5 @@ public class Hospital {
         return output;
     }
 
-    public String readHosDoc() {
-        String output = "";
-        try {
-            Connection con = obj.connect();
-            if (con == null) {
-                return "Error while connecting to the database for reading.";
-            }
-            // Prepare the html table to be displayed
-            output = "<table border=\"1\"><tr><th> Hospital ID </th><th> Hospital Name </th></tr>";
-
-
-
-
-            String query = "select hosID,hosName from hospital";
-            Statement stmt = con.createStatement();
-            ResultSet rs = stmt.executeQuery(query);
-            // iterate through the rows in the result set
-            while (rs.next()) {
-                String hosID = Integer.toString(rs.getInt("hosID"));
-                String hosName = rs.getString("hosName");
-
-
-                // Add into the html table
-
-                output += "<tr><td>" + hosID + "</td>";
-                output += "<td>" + hosName + "</td>";
-
-
-            }
-            con.close();
-            // Complete the html table
-            output += "</table>";
-        } catch (Exception e) {
-            output = "Error while reading the Hospitals.";
-            System.err.println(e.getMessage());
-        }
-        return output;
-
-
-    }
 
 }
